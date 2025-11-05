@@ -106,12 +106,12 @@ This will build and start:
 
 | Service | Port | Description |
 |----------|------|-------------|
-| `qualipro-front` | 8080 | Quasar frontend |
+| `qualipro-front` | 9000 | Quasar frontend |
 | `qualipro-backend` | 3000 | Node.js API |
 | `qualipro-db` | 3307 (host) → 3306 (container) | MySQL database |
 
 Access:
-- Frontend → http://localhost:8080  
+- Frontend → http://localhost:9000  
 - Backend → http://localhost:3000  
 
 ---
@@ -136,9 +136,9 @@ DB_NAME=qualipro_db
 
 | Service | Description |
 |----------|--------------|
-| `qualipro-backend` | Node.js API (connects to MySQL via service name `qualipro-db`) |
+| `qualipro-backend` | Node.js API (connects to MySQL via service name `qualipro`) |
 | `qualipro-front` | Quasar built and served by Nginx |
-| `qualipro-db` | MySQL 8 persistent database |
+| `qualipro` | MySQL 8 persistent database |
 
 All services are connected via the Docker network `qualipro-net`.
 
