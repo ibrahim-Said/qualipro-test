@@ -102,8 +102,9 @@ const columns = [
   },
   { name: 'last_name', align: 'center', label: 'Nom', field: 'last_name', sortable: true },
   { name: 'email', label: 'Email', field: 'email', sortable: true },
-  { name: 'phone', label: 'Téléphone', field: 'phone' },
-  { name: 'role', label: 'Rôle', field: 'role' },
+  { name: 'phone', label: 'Téléphone', field: 'phone',sortable: true },
+  { name: 'role', label: 'Rôle', field: 'role' ,sortable: false },
+  { name: 'job', label: 'Job', field: 'job' ,sortable: true },
   { name: 'action', label: 'Action', field: 'action', sortable: false }
 ]
 
@@ -114,6 +115,7 @@ const rows = computed(() =>
     last_name: user.last_name,
     email: user.email,
     phone: user.phone,
+    job: user.job,
     role: user.role?.name
   }))
 )
@@ -133,7 +135,8 @@ const confirmDeleteUser = async () => {
   confirmDelete.value = false
   selectedUser.value = null
 }
-onMounted(() => {
-  userStore.fetchUsers()
+onMounted(async() => {
+  if (!AuthService.isAuthenticated()) return
+  await userStore.fetchUsers()
 })
 </script>

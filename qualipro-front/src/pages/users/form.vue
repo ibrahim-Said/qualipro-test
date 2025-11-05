@@ -25,6 +25,12 @@
             <q-icon name="phone" />
           </template>
         </q-input>
+        <q-input v-model="form.job" type="text" :rules="[val => !!val || 'Champ obligatoire']" label="Job"
+          outlined dense>
+          <template #prepend>
+            <q-icon name="tag" />
+          </template>
+        </q-input>
         <q-select v-model="form.role" :options="roles" :rules="[val => !!val || 'Champ obligatoire']" label="Rôle"
           outlined dense>
           <template v-slot:prepend>
@@ -74,7 +80,8 @@ const form = reactive({
   phone: '',
   role: null,
   email: '',
-  password: ''
+  password: '',
+  job: ''
 })
 const loading = ref(false)
 const roles = ref([]);
@@ -85,13 +92,11 @@ const onSubmit = async () => {
       last_name: form.last_name,
       phone: form.phone,
       role_id: form.role?.value,
-      email: form.email
+      email: form.email,
+      job: form.job,
+      password:form.password
     }
     if (form.id) {
-      formData = {
-        ...formData,
-        password: form.password ? form.password : undefined
-      }
       await userStore.updateUser(form.id, formData);
     } else {
       await userStore.createUser(formData);
@@ -118,6 +123,7 @@ onMounted(async () => {
         form.phone = user.phone;
         form.role = { value: user.role.id, label: user.role.name };
         form.email = user.email;
+        form.job = user.job;
       } else {
         router.push('/users');
       }

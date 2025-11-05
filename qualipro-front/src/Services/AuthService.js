@@ -13,8 +13,9 @@ export const AuthService = {
   isAuthenticated() {
     return !!localStorage.getItem('authenticatedUser')
   },
-  setAuthenticatedUser(user) {
+  async setAuthenticatedUser(user) {
     localStorage.setItem('authenticatedUser', JSON.stringify(user))
+    window.dispatchEvent(new Event('token-updated'))
   },
   getAuthenticatedUser() {
     const user = localStorage.getItem('authenticatedUser')
@@ -22,6 +23,7 @@ export const AuthService = {
   },
   logout() {
     localStorage.removeItem('authenticatedUser')
+    window.dispatchEvent(new Event('token-updated'))
   },
   getToken() {
     const user = this.getAuthenticatedUser()

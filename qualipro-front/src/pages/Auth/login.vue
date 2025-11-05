@@ -75,13 +75,14 @@ const onSubmit = async () => {
   loading.value = true
   try {
     const response = await AuthService.login({ email: email.value, password: password.value })
-    AuthService.setAuthenticatedUser(response.user)
-    router.push({ name: 'user.list' })
+    await AuthService.setAuthenticatedUser(response.user)
     $q.notify({ type: 'positive', message: 'Connexion réussie !' })
+
   } catch (err) {
     $q.notify({ type: 'negative', message: 'Veuillez vérifier vos identifiants.' })
   } finally {
     loading.value = false
+    router.push({ name: 'user.list' })
   }
 }
 
