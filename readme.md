@@ -35,7 +35,6 @@ qualipro/
 
 ```bash
 cd qualipro-backend
-npm install --save-dev sequelize-cli
 npm install
 npx sequelize-cli db:create
 npx sequelize-cli db:migrate
@@ -189,3 +188,4 @@ So it remains intact even after container restarts.
 
 **Author:** Said Ibrahim 
 **Stack:** Quasar + Node.js + MySQL 8 + Docker
+
